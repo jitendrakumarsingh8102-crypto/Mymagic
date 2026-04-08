@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, My Love</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Lora:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "blush-beige": "#F5E6D3",
+              "dusty-rose": "#E8B4B8",
+              "soft-ivory": "#FDF8F0",
+              "faded-peach": "#F4C2A1",
+              "warm-gold": "#D4AF37",
+              "rose-mist": "#F2D7D5",
+              "cream-white": "#FFFEF7",
+            },
+            fontFamily: {
+              "great-vibes": ["Great Vibes", "cursive"],
+              dancing: ["Dancing Script", "cursive"],
+              poppins: ["Poppins", "sans-serif"],
+              lora: ["Lora", "serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
