@@ -227,7 +227,7 @@ const MomentsView = ({ onNavigate }) => {
     <div 
       className="min-h-screen relative overflow-x-hidden font-poppins"
       style={{
-        background: 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://images.unsplash.com/photo-1543728069-a3f99cba4fb3?q=80&w=1920&auto=format&fit=crop")',
+        background: 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/placeholder.svg?height=1080&width=1920")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
