@@ -1,0 +1,587 @@
+/* Custom Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes polaroidHover {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(-2deg) scale(1.05);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Animation Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 3s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 2s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 1.5s ease-out;
+}
+
+.animate-heart-beat {
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Floating Elements */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #d4af37, transparent);
+  border-radius: 50%;
+  animation: sparkle 3s linear infinite;
+}
+
+.floating-heart {
+  position: absolute;
+  color: #e8b4b8;
+  font-size: 1.5rem;
+  animation: float 4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Hero Section */
+.hero-section {
+  background-image: linear-gradient(
+      rgba(248, 237, 227, 0.1),
+      rgba(242, 215, 213, 0.1)
+    ),
+    url("back_groung_fm.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Memory Section */
+.memory-photo {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.memory-photo:hover {
+  transform: rotate(0deg) scale(1.8);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.memory-note {
+  transition: transform 0.3s ease;
+}
+
+.memory-note:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+/* Dialogue Cards */
+.dialogue-card {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(232, 180, 184, 0.2);
+}
+
+.dialogue-card:hover {
+  transform: rotate(0deg) scale(1.02);
+  box-shadow: 0 10px 30px rgba(232, 180, 184, 0.3);
+}
+
+/* Polaroid Gallery */
+.polaroid {
+  background: rgb(220, 220, 218);
+  padding: 1rem 1rem 1rem 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+  transform: rotate(-12deg);
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.polaroid:nth-child(even) {
+  transform: rotate(-2deg);
+}
+
+.polaroid:nth-child(even):hover {
+  transform: rotate(2deg) scale(1.05);
+}
+
+.polaroid:nth-child(3n) {
+  transform: rotate(5deg);
+}
+
+.polaroid:nth-child(4n) {
+  transform: rotate(-5deg);
+}
+
+.handwritten-note {
+  font-family: "Dancing Script", cursive;
+  color: #8b4b6b;
+  font-size: 1.1rem;
+  transform: rotate(-1deg);
+  opacity: 0;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.polaroid:hover .handwritten-note {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+/* Heart Easter Egg */
+.heart-trigger {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3));
+}
+
+.heart-trigger:hover {
+  filter: drop-shadow(0 6px 12px rgba(212, 175, 55, 0.4));
+}
+
+.hidden-message {
+  opacity: 0;
+  transform: scale(0.8) translateX(-50%);
+  transition: all 0.5s ease;
+  z-index: 10;
+  max-width: 300px;
+}
+
+.hidden-message.show {
+  opacity: 1;
+  transform: scale(1) translateX(-50%);
+}
+
+/* Countdown */
+.countdown-number {
+  background: linear-gradient(45deg, #e8b4b8, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Glass Effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-effect:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Text Effects */
+.text-shadow-soft {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Parallax Background */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 3rem;
+  }
+
+  .polaroid,
+  .polaroid:nth-child(even),
+  .polaroid:nth-child(3n),
+  .polaroid:nth-child(4n) {
+    transform: rotate(0deg) !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .polaroid:hover {
+    transform: scale(1.02) !important;
+  }
+
+  .hidden-message {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.8) !important;
+    max-width: 90vw;
+  }
+
+  .hidden-message.show {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .countdown-number {
+    font-size: 3rem;
+  }
+
+  .floating-heart {
+    font-size: 1rem;
+  }
+
+  .sparkle {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+/* Loading Animation */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5e6d3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e8b4b8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Selection Color */
+::selection {
+  background: rgba(232, 180, 184, 0.3);
+  color: #8b4b6b;
+}
+
+::-moz-selection {
+  background: rgba(232, 180, 184, 0.3);
+  color: #8b4b6b;
+}
+
+.video-gallery {
+  padding: 40px 20px;
+  background-color: #fdfdfd;
+  text-align: center;
+}
+
+.video-gallery h2 {
+  font-size: 2em;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: rotate(1deg);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-video:hover {
+  transform: rotate(0deg);
+}
+
+/* Lightbox Styles */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 80%;
+  text-align: center;
+}
+
+#lightbox-video {
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-controls {
+  margin-top: 10px;
+}
+
+.lightbox-controls button {
+  margin: 5px;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #333;
+  cursor: pointer;
+}
+
+.lightbox-controls button:hover {
+  background-color: #eee;
+}
+
+/* For videos inside the grid */
+.gallery-video {
+  width: 100%;
+  max-width: 100%;
+  height: 200px; /* Fixed height when not in lightbox */
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: rotate(1deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-video:hover {
+  transform: rotate(0deg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 600px) {
+  .gallery-video {
+    height: 150px;
+  }
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .video-grid {
+      grid-template-columns: repeat(2, 1fr); /* Force 2 columns on tablets */
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .video-grid {
+      grid-template-columns: 1fr; /* Single column on small screens */
+    }
+  
+    .gallery-video {
+      height: 140px;
+    }
+  }
+  @media (max-width: 480px) {
+    .lightbox-content {
+      max-height: 90%;
+      padding: 10px;
+    }
+  
+    #lightbox-video {
+      max-height: 60vh;
+    }
+  }
+  @media (max-width: 600px) {
+    .video-gallery {
+      padding: 20px 10px;
+    }
+  
+    .video-gallery h2 {
+      font-size: 1.5em;
+    }
+  }
+
+  .youtube-gallery {
+    padding: 40px 20px;
+    background-color: #fefaf7;
+    text-align: center;
+  }
+  
+  .youtube-gallery h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .youtube-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .youtube-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: rotate(1deg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #000;
+  }
+  
+  .youtube-video:hover {
+    transform: rotate(0deg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+  
+  .youtube-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+  }
+  
+  @media (max-width: 767px) {
+    .youtube-gallery h2 {
+      font-size: 1.5em;
+    }
+  
+    .youtube-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+/* Added dynamically in original JS */
+.polaroid.touched .handwritten-note {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+@media (max-width: 768px) {
+    .polaroid.touched {
+        transform: scale(1.02);
+    }
+}
+
