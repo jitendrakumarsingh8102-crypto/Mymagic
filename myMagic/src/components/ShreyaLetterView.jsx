@@ -289,16 +289,18 @@ const ShreyaLetterView = ({ onNavigate }) => {
   const currentData = letterData[activeLetter];
 
   return (
-    <div 
-      className="min-h-screen relative overflow-x-hidden font-poppins selection:bg-[var(--blush-pink)] selection:text-[var(--dark-text)]"
-      style={{
-        background: 'linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("/placeholder.svg?height=1080&width=1920")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-        perspective: '1500px'
-      }}
-    >
+    <div className="min-h-screen relative overflow-x-hidden font-poppins selection:bg-[var(--blush-pink)] selection:text-[var(--dark-text)]">
+      {/* Optimized Fixed Background Layer */}
+      <div 
+        className="fixed inset-0 z-[-1] pointer-events-none"
+        style={{
+          background: 'linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("/placeholder.svg?height=1080&width=1920")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          willChange: 'transform'
+        }}
+      />
+
       <div className="floating-hearts pointer-events-none" ref={bgContainerRef} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}></div>
 
       {/* Top Navigation */}
@@ -438,8 +440,7 @@ const ShreyaLetterView = ({ onNavigate }) => {
 
         .interactive-bubble {
           position: absolute;
-          background: rgba(255, 255, 255, 0.05);
-          backdrop-filter: blur(5px);
+          background: rgba(255, 255, 255, 0.08); /* slightly more opaque to reduce need for heavy blur */
           border: 1px solid rgba(255, 255, 255, 0.2);
           border-radius: 50%;
           box-shadow: inset 0 0 10px rgba(255,255,255,0.1), 0 0 15px rgba(255,255,255,0.05);

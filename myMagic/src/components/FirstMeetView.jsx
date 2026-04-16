@@ -262,6 +262,43 @@ const FirstMeetView = ({ onNavigate, onNavigateMoments }) => {
     };
   }, []);
 
+  // Simple Lazy Loading Component for Iframes
+  const LazyLoadedIframe = ({ videoId }) => {
+    const [isVisible, setIsVisible] = React.useState(false);
+    const iframeRef = React.useRef(null);
+
+    React.useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1, rootMargin: "200px" }
+      );
+      if (iframeRef.current) observer.observe(iframeRef.current);
+      return () => observer.disconnect();
+    }, []);
+
+    return (
+      <div ref={iframeRef} className="youtube-video">
+        {isVisible ? (
+          <iframe 
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0`} 
+            allowFullScreen 
+            title={`YouTube video ${videoId}`}
+            loading="lazy"
+          ></iframe>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gray-200 animate-pulse">
+            <span className="text-gray-400 font-dancing text-xl">Loading Magic... ✨</span>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="bg-gradient-to-br from-soft-ivory via-blush-beige to-rose-mist font-poppins overflow-x-hidden relative min-h-screen">
       <nav className="navigation">
@@ -317,15 +354,17 @@ const FirstMeetView = ({ onNavigate, onNavigateMoments }) => {
       <section className="video-gallery w-full z-10 relative">
         <h2 className="font-great-vibes text-5xl mb-12">Our Memories in Motion</h2>
         <div className="video-grid">
-          {[1, 2, 3, 4, 5, 6, 7].map(i => <video key={i} src={`/assets/video${i}.mp4`} className="gallery-video" data-index={i-1} loop></video>)}
-          <video src="/assets/together.mp4" className="gallery-video" data-index="7" loop></video>
+          {[1, 2, 3, 4, 5, 6, 7].map(i => <video key={i} src={`/assets/video${i}.mp4`} className="gallery-video" data-index={i-1} loop preload="none" loading="lazy"></video>)}
+          <video src="/assets/together.mp4" className="gallery-video" data-index="7" loop preload="none" loading="lazy"></video>
         </div>
       </section>
 
       <section className="youtube-gallery w-full z-10 relative">
         <h2 className="font-great-vibes text-5xl mb-12">Special Moments on YouTube</h2>
         <div className="youtube-grid">
-          {['56KKUz5BmD4', 'XWEoIzgldas', 'wY4H9liJiUs', 'rneMb2-C4vY', 'mLTBWsFr7FY', 'HcNZtnUs-7E', 'Y_47mnroOyE', '6R930aDp54I', 'sgq93RNXqh8', 'dzuQzbgYyIE', 'WxsjSs9csrQ', 'Sh5f5gIvw9w', 'm2-lGGf52O8', 'TP3FSjUB9iQ', 'RtjPv1lcNi0'].map(id => <div key={id} className="youtube-video"><iframe src={`https://www.youtube.com/embed/${id}`} allowFullScreen></iframe></div>)}
+          {['56KKUz5BmD4', 'XWEoIzgldas', 'wY4H9liJiUs', 'rneMb2-C4vY', 'mLTBWsFr7FY', 'HcNZtnUs-7E', 'Y_47mnroOyE', '6R930aDp54I', 'sgq93RNXqh8', 'dzuQzbgYyIE', 'WxsjSs9csrQ', 'Sh5f5gIvw9w', 'm2-lGGf52O8', 'TP3FSjUB9iQ', 'RtjPv1lcNi0'].map(id => (
+            <LazyLoadedIframe key={id} videoId={id} />
+          ))}
         </div>
       </section>
 

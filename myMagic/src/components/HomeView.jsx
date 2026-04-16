@@ -111,40 +111,21 @@ const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya }) => {
       }
     }
 
-    // Timeline Animation
+    // Timeline and Love Letter Animations using IntersectionObserver
     const timelineItems = document.querySelectorAll(".timeline-item");
-    
-    function checkScroll() {
-      timelineItems.forEach((item) => {
-        const itemTop = item.getBoundingClientRect().top;
-        if (itemTop < window.innerHeight * 0.8) {
-          item.classList.add("animate");
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate", "visible");
         }
       });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-      // Love Letter Animation
-      const loveTexts = document.querySelectorAll(".love-text");
-      loveTexts.forEach((text) => {
-        const textTop = text.getBoundingClientRect().top;
-        if (textTop < window.innerHeight * 0.8) {
-          text.classList.add("visible");
-        }
-      });
-
-      // Wishes Animation
-      const wishCards = document.querySelectorAll(".wish-card");
-      wishCards.forEach((card, index) => {
-        const cardTop = card.getBoundingClientRect().top;
-        if (cardTop < window.innerHeight * 0.8) {
-          setTimeout(() => {
-            card.classList.add("animate");
-          }, index * 200);
-        }
-      });
-    }
-
-    window.addEventListener("scroll", checkScroll);
-    checkScroll(); // Check on load
+    timelineItems.forEach(item => animationObserver.observe(item));
+    document.querySelectorAll(".love-text").forEach(text => animationObserver.observe(text));
+    document.querySelectorAll(".wish-card").forEach((card, index) => {
+      animationObserver.observe(card);
+    });
 
     // Smooth Scrolling
     const anchors = document.querySelectorAll('a[href^="#"]');
@@ -455,7 +436,7 @@ const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya }) => {
     return () => {
       clearInterval(bubbleInterval);
       clearInterval(slideInterval);
-      window.removeEventListener("scroll", checkScroll);
+      animationObserver.disconnect();
       anchors.forEach((anchor) => anchor.removeEventListener("click", handleAnchorClick));
       window.removeEventListener("click", handleOutsideClick);
       if(observer) observer.disconnect();
