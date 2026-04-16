@@ -23,15 +23,24 @@ requiredEnv.forEach((key) => {
 });
 
 // Middleware
-const corsOptions = {
-  origin: [
-    process.env.FRONTEND_URL, 
-    'http://localhost:5173', 
+// CORS Configuration - Robust Origin Handling
+const getOrigins = () => {
+  const customOrigin = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, "") : null;
+  return [
+    customOrigin,
+    'https://mymagic231.netlify.app',
+    'http://localhost:5173',
     'http://localhost:5174',
     'http://localhost:5175'
-  ].filter(Boolean),
+  ].filter(Boolean);
+};
+
+const corsOptions = {
+  origin: getOrigins(),
+  credentials: true,
   optionsSuccessStatus: 200
 };
+
 app.use(cors(corsOptions));
 app.use(express.json());
 

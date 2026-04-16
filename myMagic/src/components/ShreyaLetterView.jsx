@@ -294,7 +294,7 @@ const ShreyaLetterView = ({ onNavigate }) => {
       <div 
         className="fixed inset-0 z-[-1] pointer-events-none"
         style={{
-          background: 'linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("/placeholder.svg?height=1080&width=1920")',
+          background: 'linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url("https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=1920&auto=format&fit=crop")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           willChange: 'transform'
