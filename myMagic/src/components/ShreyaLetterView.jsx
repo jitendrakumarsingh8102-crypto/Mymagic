@@ -203,7 +203,7 @@ const ShreyaLetterView = ({ onNavigate }) => {
       const bubble = document.createElement("div");
       bubble.classList.add("interactive-bubble");
       
-      const size = Math.random() * 40 + 50; 
+      const size = Math.random() * 50 + 70; 
       bubble.style.width = `${size}px`;
       bubble.style.height = `${size}px`;
       bubble.style.left = `${Math.random() * 90 + 5}%`;
@@ -301,7 +301,7 @@ const ShreyaLetterView = ({ onNavigate }) => {
         }}
       />
 
-      <div className="floating-hearts pointer-events-none" ref={bgContainerRef} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}></div>
+      <div className="bubbles-container pointer-events-none" ref={bgContainerRef} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 50 }}></div>
 
       {/* Top Navigation */}
       <div className="absolute top-0 w-full p-6 z-20 flex justify-between items-center">

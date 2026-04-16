@@ -29,11 +29,19 @@ const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya }) => {
         const bubble = document.createElement("span");
         bubble.textContent = "Radhe Radhe";
 
-        // size between 30-50px
-        const size = Math.random() * 20 + 30; 
-        bubble.style.left = Math.random() * 100 + "%";
-        bubble.style.fontSize = `${Math.random() * 0.5 + 0.8}rem`;
+        // size between 70-110px for better tap area
+        const size = Math.random() * 40 + 70; 
+        bubble.style.left = Math.random() * 90 + 5 + "%";
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.display = "flex";
+        bubble.style.alignItems = "center";
+        bubble.style.justifyContent = "center";
+        bubble.style.textAlign = "center";
+        bubble.style.fontSize = `${Math.random() * 0.5 + 0.9}rem`;
         bubble.style.animationDuration = `${Math.random() * 10 + 10}s`;
+        bubble.style.pointerEvents = "auto";
+        bubble.style.cursor = "pointer";
 
         heartContainer.appendChild(bubble);
 
