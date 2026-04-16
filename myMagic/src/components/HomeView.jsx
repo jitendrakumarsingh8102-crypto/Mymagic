@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const HomeView = ({ onNavigate }) => {
+const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya }) => {
   const [activeSlide, setActiveSlide] = useState(0);
   const reasonsData = [
     { img: "/assets/coresal!.jpg", text: "Shreya, Tumhari Simplicity" },
@@ -483,13 +483,26 @@ const HomeView = ({ onNavigate }) => {
           <li><a href="#journey">Our Journey</a></li>
           <li><a href="#letter">Love Letter</a></li>
           <li><a href="#reasons">Why I Love You</a></li>
-          <li><a href="#video">Surprise</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#wishes">Wishes</a></li>
-          <li><a href="#closing">Closing</a></li>
           <li>
-            <a href="#first-meet" onClick={(e) => { e.preventDefault(); onNavigate('first-meet') }}>
-              First_meet
+            <a href="#video">Surprise</a>
+          </li>
+          <li>
+            <a href="#gallery">Memories</a>
+          </li>
+          <li>
+            <a href="#message">Message</a>
+          </li>
+          <li>
+            <a href="#" onClick={(e) => { e.preventDefault(); onNavigateMoments(); }}>Moments Gallery 😍</a>
+          </li>
+          <li>
+            <a href="#" className="btn-small" onClick={(e) => { e.preventDefault(); onNavigateShreya(); }}>
+              SHREYA ❤️
+            </a>
+          </li>
+          <li>
+            <a href="#" className="btn-small" onClick={(e) => { e.preventDefault(); onNavigate(); }}>
+              The First Time We Met 💞
             </a>
           </li>
           <li>
