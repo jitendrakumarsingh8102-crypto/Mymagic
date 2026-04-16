@@ -262,7 +262,7 @@ const FirstMeetView = ({ onNavigate, onNavigateMoments }) => {
     };
   }, []);
 
-  // Simple Lazy Loading Component for Iframes
+  // Improved Lazy Loading Component for Iframes with Thumbnails
   const LazyLoadedIframe = ({ videoId }) => {
     const [isVisible, setIsVisible] = React.useState(false);
     const iframeRef = React.useRef(null);
@@ -275,24 +275,41 @@ const FirstMeetView = ({ onNavigate, onNavigateMoments }) => {
             observer.disconnect();
           }
         },
-        { threshold: 0.1, rootMargin: "200px" }
+        { threshold: 0.1, rootMargin: "300px" }
       );
       if (iframeRef.current) observer.observe(iframeRef.current);
       return () => observer.disconnect();
     }, []);
 
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
     return (
-      <div ref={iframeRef} className="youtube-video">
+      <div 
+        ref={iframeRef} 
+        className="aspect-video bg-[var(--blush-pink)] rounded-xl overflow-hidden shadow-lg relative group transition-all duration-500 hover:shadow-2xl hover:-translate-y-1"
+        style={{
+          backgroundImage: isVisible ? 'none' : `url(${thumbnailUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         {isVisible ? (
-          <iframe 
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0`} 
-            allowFullScreen 
-            title={`YouTube video ${videoId}`}
-            loading="lazy"
+          <iframe
+            className="w-full h-full border-none animate-fade-in"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
           ></iframe>
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-200 animate-pulse">
-            <span className="text-gray-400 font-dancing text-xl">Loading Magic... ✨</span>
+          <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors duration-500">
+            <div className="w-14 h-14 bg-white/90 rounded-full flex items-center justify-center shadow-xl transform transition-all duration-300 group-hover:scale-110 group-hover:bg-white cursor-pointer">
+              <span className="text-[var(--rose-gold)] text-xl ml-1">▶</span>
+            </div>
+            {/* Loading text fallback if image fails or still loading */}
+            <div className="absolute bottom-4 left-0 w-full text-center">
+               <p className="text-white text-xs font-dancing opacity-0 group-hover:opacity-100 transition-opacity">Magic Video ✨</p>
+            </div>
           </div>
         )}
       </div>

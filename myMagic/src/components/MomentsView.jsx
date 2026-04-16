@@ -123,6 +123,7 @@ const MomentsView = ({ onNavigate }) => {
   const [previews, setPreviews] = useState([]);
   const [caption, setCaption] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const bgContainerRef = useRef(null);
 
   useEffect(() => {
@@ -162,11 +163,14 @@ const MomentsView = ({ onNavigate }) => {
 
   const fetchPosts = async () => {
     try {
+      setIsLoading(true);
       const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://mymagic-backend.onrender.com';
       const response = await axios.get(`${apiBaseUrl}/api/posts`);
       setPosts(response.data);
     } catch (error) {
       console.error('Error fetching posts:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -243,7 +247,12 @@ const MomentsView = ({ onNavigate }) => {
       </nav>
 
       <div className="pt-28 pb-10 max-w-[600px] mx-auto px-4 flex flex-col gap-10">
-        {posts.length === 0 ? (
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center mt-20 gap-4">
+            <div className="text-4xl animate-bounce">❤️</div>
+            <div className="text-xl text-[var(--rose-gold)] font-['Great_Vibes'] animate-pulse">Loading Memories...</div>
+          </div>
+        ) : posts.length === 0 ? (
           <div className="text-center text-gray-500 italic mt-20">No moments yet. Add the first one!</div>
         ) : (
           posts.map((post) => (
