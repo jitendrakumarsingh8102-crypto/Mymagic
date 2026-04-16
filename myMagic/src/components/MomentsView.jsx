@@ -162,7 +162,8 @@ const MomentsView = ({ onNavigate }) => {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/posts');
+      const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://mymagic-backend.onrender.com';
+      const response = await axios.get(`${apiBaseUrl}/api/posts`);
       setPosts(response.data);
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -171,14 +172,16 @@ const MomentsView = ({ onNavigate }) => {
 
   const handleLike = async (postId) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/posts/${postId}/like`);
+      const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://mymagic-backend.onrender.com';
+      const response = await axios.put(`${apiBaseUrl}/api/posts/${postId}/like`);
       setPosts((prev) => prev.map(p => p._id === postId ? { ...p, likes: response.data.likes } : p));
     } catch (error) { console.error(error); }
   };
 
   const handleDelete = async (postId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+      const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://mymagic-backend.onrender.com';
+      await axios.delete(`${apiBaseUrl}/api/posts/${postId}`);
       setPosts((prev) => prev.filter(p => p._id !== postId));
     } catch (error) { console.error(error); }
   };
@@ -202,7 +205,8 @@ const MomentsView = ({ onNavigate }) => {
     formData.append('caption', caption);
 
     try {
-      await axios.post('http://localhost:5000/api/posts', formData, {
+      const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://mymagic-backend.onrender.com';
+      await axios.post(`${apiBaseUrl}/api/posts`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       fetchPosts();
