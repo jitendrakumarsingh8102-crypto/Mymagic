@@ -32,7 +32,13 @@ const tryParseJSON = (str) => {
 // GET all posts
 router.get('/', async (req, res) => {
   try {
-    const posts = await Post.find().sort({ createdAt: -1 });
+    let filter = {};
+    if (req.query.category === 'moments') {
+      filter = { $or: [{ category: 'moments' }, { category: { $exists: false } }] };
+    } else if (req.query.category) {
+      filter = { category: req.query.category };
+    }
+    const posts = await Post.find(filter).sort({ createdAt: -1 });
     res.json(posts);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -63,6 +69,7 @@ router.post('/', (req, res, next) => {
     const newPost = new Post({
       imageUrls: imageUrls,
       caption: req.body.caption || '',
+      category: req.body.category || 'moments',
     });
 
     const savedPost = await newPost.save();

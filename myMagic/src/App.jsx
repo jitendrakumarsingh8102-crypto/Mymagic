@@ -3,6 +3,7 @@ import HomeView from './components/HomeView';
 import FirstMeetView from './components/FirstMeetView';
 import MomentsView from './components/MomentsView';
 import ShreyaLetterView from './components/ShreyaLetterView';
+import UsInDelhiView from './components/UsInDelhiView';
 
 function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -14,6 +15,7 @@ function App() {
           onNavigate={() => setCurrentView('first-meet')} 
           onNavigateMoments={() => setCurrentView('moments')}
           onNavigateShreya={() => setCurrentView('shreya')}
+          onNavigateDelhi={() => setCurrentView('delhi')}
         />
       )}
       {currentView === 'first-meet' && (
@@ -27,6 +29,9 @@ function App() {
       )}
       {currentView === 'shreya' && (
         <ShreyaLetterView onNavigate={() => setCurrentView('home')} />
+      )}
+      {currentView === 'delhi' && (
+        <UsInDelhiView onNavigate={() => setCurrentView('home')} />
       )}
     </div>
   );

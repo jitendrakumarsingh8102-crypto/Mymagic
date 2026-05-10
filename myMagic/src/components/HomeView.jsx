@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya }) => {
+const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya, onNavigateDelhi }) => {
+  const handleDelhiClick = (e) => {
+    e.preventDefault();
+    const pwd = window.prompt("Enter password to view our Delhi memories:");
+    if (pwd === "Shreya") {
+      onNavigateDelhi();
+    } else if (pwd !== null) {
+      alert("Incorrect password!");
+    }
+  };
   const [activeSlide, setActiveSlide] = useState(0);
   const reasonsData = [
     { img: "/assets/coresal!.jpg", text: "Shreya, Tumhari Simplicity" },
@@ -487,6 +496,11 @@ const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya }) => {
           <li>
             <a href="#" className="btn-small" onClick={(e) => { e.preventDefault(); onNavigateShreya(); }}>
               SHREYA ❤️
+            </a>
+          </li>
+          <li>
+            <a href="#" className="btn-small" onClick={handleDelhiClick}>
+              Us in Delhi ❤️
             </a>
           </li>
           <li>

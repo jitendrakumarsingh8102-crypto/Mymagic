@@ -13,6 +13,10 @@ const postSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  category: {
+    type: String,
+    default: 'moments',
+  },
   createdAt: {
     type: Date,
     default: Date.now,

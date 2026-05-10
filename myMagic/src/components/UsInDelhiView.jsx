@@ -116,7 +116,7 @@ const PostCard = ({ post, onLike, onDelete }) => {
   );
 };
 
-const MomentsView = ({ onNavigate }) => {
+const UsInDelhiView = ({ onNavigate }) => {
   const [posts, setPosts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageFiles, setImageFiles] = useState([]);
@@ -165,7 +165,7 @@ const MomentsView = ({ onNavigate }) => {
     try {
       setIsLoading(true);
       const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://mymagic-backend.onrender.com';
-      const response = await axios.get(`${apiBaseUrl}/api/posts?category=moments`);
+      const response = await axios.get(`${apiBaseUrl}/api/posts?category=delhi`);
       setPosts(response.data);
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -207,7 +207,7 @@ const MomentsView = ({ onNavigate }) => {
     const formData = new FormData();
     imageFiles.forEach(file => formData.append('images', file));
     formData.append('caption', caption);
-    formData.append('category', 'moments');
+    formData.append('category', 'delhi');
 
     try {
       const apiBaseUrl = import.meta.env.VITE_API_URL || 'https://mymagic-backend.onrender.com';
@@ -243,7 +243,7 @@ const MomentsView = ({ onNavigate }) => {
         <button onClick={onNavigate} className="btn-small bg-[var(--ivory)] text-[var(--dark-text)] px-4 py-2 rounded-full border border-[var(--rose-gold)] font-medium hover:bg-[var(--rose-gold)] hover:text-white transition-all shadow-md">
           ❮ Home
         </button>
-        <h1 className="text-2xl md:text-4xl text-[var(--rose-gold)] m-0 font-['Great_Vibes'] drop-shadow-md">Moments Gallery</h1>
+        <h1 className="text-2xl md:text-4xl text-[var(--rose-gold)] m-0 font-['Great_Vibes'] drop-shadow-md">Us in Delhi ❤️</h1>
         <div className="w-10 md:w-20"></div>
       </nav>
 
@@ -302,4 +302,4 @@ const MomentsView = ({ onNavigate }) => {
   );
 };
 
-export default MomentsView;
+export default UsInDelhiView;
