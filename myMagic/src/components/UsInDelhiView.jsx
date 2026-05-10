@@ -45,16 +45,30 @@ const PostCard = ({ post, onLike, onDelete }) => {
           </div>
         )}
 
-        {images.map((url, idx) => (
-          <img 
-            key={idx}
-            src={url} 
-            alt={`Moment ${idx + 1}`} 
-            className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${
-              idx === currentIdx ? "opacity-100 scale-100 z-10" : "opacity-0 scale-105 z-0"
-            }`}
-          />
-        ))}
+        {images.map((url, idx) => {
+          const isVideo = url.match(/\.(mp4|webm|mov|ogg)$/i);
+          return isVideo ? (
+            <video 
+              key={idx}
+              src={url} 
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${
+                idx === currentIdx ? "opacity-100 scale-100 z-10 pointer-events-auto" : "opacity-0 scale-105 z-0 pointer-events-none"
+              }`}
+              controls={idx === currentIdx}
+              muted
+              playsInline
+            />
+          ) : (
+            <img 
+              key={idx}
+              src={url} 
+              alt={`Moment ${idx + 1}`} 
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${
+                idx === currentIdx ? "opacity-100 scale-100 z-10" : "opacity-0 scale-105 z-0"
+              }`}
+            />
+          );
+        })}
 
         {/* Carousel Arrows (More prominent) */}
         {images.length > 1 && (
@@ -195,7 +209,10 @@ const UsInDelhiView = ({ onNavigate }) => {
     setImageFiles(files);
     
     // Create previews
-    const newPreviews = files.map(file => URL.createObjectURL(file));
+    const newPreviews = files.map(file => ({
+      src: URL.createObjectURL(file),
+      type: file.type.startsWith('video/') ? 'video' : 'image'
+    }));
     setPreviews(newPreviews);
   };
 
@@ -276,23 +293,27 @@ const UsInDelhiView = ({ onNavigate }) => {
               <label className="flex flex-col items-center justify-center border-2 border-dashed border-[var(--blush-pink)] rounded-xl p-6 hover:bg-[var(--ivory)] cursor-pointer transition-colors min-h-[150px] relative overflow-hidden">
                 {previews.length > 0 ? (
                   <div className="flex gap-2 overflow-x-auto w-full p-2">
-                    {previews.map((src, i) => (
-                      <img key={i} src={src} alt="preview" className="w-20 h-20 object-cover rounded-lg flex-shrink-0 border-2 border-white shadow-sm" />
+                    {previews.map((preview, i) => (
+                      preview.type === 'video' ? (
+                        <video key={i} src={preview.src} className="w-20 h-20 object-cover rounded-lg flex-shrink-0 border-2 border-white shadow-sm" />
+                      ) : (
+                        <img key={i} src={preview.src} alt="preview" className="w-20 h-20 object-cover rounded-lg flex-shrink-0 border-2 border-white shadow-sm" />
+                      )
                     ))}
                   </div>
                 ) : (
                   <div className="text-center">
                     <span className="text-4xl block mb-2">📸</span>
-                    <span className="text-[var(--rose-gold)] font-medium">Select up to 20 photos</span>
+                    <span className="text-[var(--rose-gold)] font-medium">Select up to 20 photos/videos</span>
                   </div>
                 )}
-                <input type="file" multiple accept="image/*" onChange={handleFileChange} className="hidden" />
+                <input type="file" multiple accept="image/*,video/*" onChange={handleFileChange} className="hidden" />
               </label>
 
               <textarea placeholder="Write a sweet caption..." value={caption} onChange={(e) => setCaption(e.target.value)} className="w-full p-4 rounded-xl border border-gray-200 focus:border-[var(--rose-gold)] focus:outline-none min-h-[100px] resize-none" />
 
               <button type="submit" disabled={isUploading || imageFiles.length === 0} className="w-full bg-gradient-to-r from-[var(--rose-gold)] to-[var(--soft-gold)] text-white font-semibold py-3 rounded-xl disabled:opacity-50 transition-all hover:shadow-lg">
-                {isUploading ? `Uploading ${imageFiles.length} photos...` : 'Share Moment'}
+                {isUploading ? `Uploading ${imageFiles.length} items...` : 'Share Moment'}
               </button>
             </form>
           </div>

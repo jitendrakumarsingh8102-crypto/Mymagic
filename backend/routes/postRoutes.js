@@ -17,7 +17,8 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: 'mymagic_moments',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+    allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp', 'mp4', 'mov', 'webm'],
+    resource_type: 'auto',
   },
 });
 
