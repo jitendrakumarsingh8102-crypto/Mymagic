@@ -478,18 +478,7 @@ const HomeView = ({ onNavigate, onNavigateMoments, onNavigateShreya, onNavigateD
       <nav className="navigation">
         <ul>
           <li><a href="#hero">Home</a></li>
-          <li><a href="#journey">Our Journey</a></li>
-          <li><a href="#letter">Love Letter</a></li>
-          <li><a href="#reasons">Why I Love You</a></li>
-          <li>
-            <a href="#video">Surprise</a>
-          </li>
-          <li>
-            <a href="#gallery">Memories</a>
-          </li>
-          <li>
-            <a href="#message">Message</a>
-          </li>
+
           <li>
             <a href="#" onClick={(e) => { e.preventDefault(); onNavigateMoments(); }}>Moments Gallery 😍</a>
           </li>
